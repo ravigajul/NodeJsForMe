@@ -25,7 +25,7 @@ npm init
 ## importing nodemodules
 
 Some modules like console are available globally
-others needs to explicitly loaded
+others needs to be explicitly loaded
 
 ## require user defined modules
 
@@ -42,8 +42,67 @@ npm install chalk
 
 ## nodemon to automatically restart node application
 
-install nodemon globally and run the app.js as nodemon app.js instead of node.js. This will automatically refresh the terminal with latest output as soon as the changes are made/saved.
+install nodemon globally and run the app.js as nodemon app.js instead of node app.js. This will automatically refresh the terminal with latest output as soon as the changes are made/saved.
 
 ```node
 npm install nodemon -g
+```
+
+## Get the argument value from commandline
+
+process is a built in variable and argv is the argument vector.
+process.argv results in an array[0]=location of node.exe array[1]=path of the file run, array[2] argument that we passed
+
+```javascript
+console.log(proces.argv[2])
+//output
+[
+  'C:\\Program Files\\nodejs\\node.exe',
+  'C:\\Users\\gajur\\Downloads\\NodeJsForMe\\notes-app\\app.js',
+  'Ravi'
+]
+```
+
+## Argument parsing through yargs
+
+when you run the command node app.js remove, remove is passed as argument and print removing a note.
+note: yargs.argv or yargs.parse() is needed for this customization to work.
+
+```javascript
+yargs.command({
+    command: "remove",
+    describe:"To remove notes",
+    handler: function(){
+        console.log("Removing a note")
+    }
+})
+console.log(yargs.argv)
+```
+
+## forcing the user to pass title argument as a string type
+
+the demandOptions in bundler object makes it mandatory to pass --title="sometitle" and the type property makes the data type mandate to string
+
+```javascript
+yargs.command({
+    command: "add",
+    describe:"To add notes",
+    builder:{
+        title:{
+            describe: 'Note title',
+            demandOption: true,
+            type:'string'
+        }
+    },
+    handler: function(argv){
+        console.log("Adding a note",argv)
+    }
+})
+```
+
+## Parsing JSON Object
+
+```javascript
+JSON.stringify(jsonObject) //convert jsonobject to a string
+JSON.parse(strJson) //convert string to a json object
 ```
