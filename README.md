@@ -125,3 +125,10 @@ const evenNumbers = numbers.filter(function(n){
     return n%2 ==0 //number will be retained if this is true, will be removed if false
 })
 ```
+
+## Formatted print on console
+```javascript
+import chalk from 'chalk'
+console.log(chalk.green.inverse("New Notes Added!"))
+console.log(chalk.red.inverse("New Notes removed!"))
+```
