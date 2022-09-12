@@ -37,8 +37,12 @@ here require will import the variables or object exported in utils.js by modules
 for several string util functions like isEmail, isURL etc.
 
 ## Utility for Terminal String Styling
-
+```javascript
 npm install chalk
+import chalk from 'chalk'
+console.log(chalk.green.inverse("New Notes Added!"))
+console.log(chalk.red.inverse("New Notes removed!"))
+```
 
 ## nodemon to automatically restart node application
 
