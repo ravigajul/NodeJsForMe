@@ -106,3 +106,15 @@ yargs.command({
 JSON.stringify(jsonObject) //convert jsonobject to a string
 JSON.parse(strJson) //convert string to a json object
 ```
+
+## Exporting multiple functions from a .js file
+```javascript
+//exporting multiple functions
+export { getNotes, addNotes }
+
+//importing
+import * as notes from './notes.js'
+notes.getNotes
+notes.addNotes
+```
+

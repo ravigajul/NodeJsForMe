@@ -1,11 +1,11 @@
 import fs from 'fs';
-import getNotes from './notes.js';
+import * as notes from './notes.js'
 import validator from 'validator';
 import chalk from 'chalk';
 import yargs from 'yargs'
 fs.writeFileSync('notes.txt', 'This is the first line written by nodejs');
 fs.appendFileSync('notes.txt', '\nThis is appended line');
-console.log(getNotes());
+console.log(notes.getNotes());
 console.log(validator.isEmail('ravi.gajul@test.com'));
 console.log(validator.isURL('https://www.google.com'));
 console.log(chalk.green("Hi There!"));
@@ -30,8 +30,7 @@ yargs.command({
         }
     },
     handler: function (argv) {
-        console.log("Title:"+ argv.title)
-        console.log("Body:"+ argv.body)
+        notes.addNotes(argv.title,argv.body)
     }
 })
 
@@ -51,8 +50,7 @@ yargs.command({
         }
     },
     handler: function (argv) {
-        console.log("Title:"+ argv.title)
-        console.log("Body:"+argv.body)
+        notes.removeNotes(argv.title,argv.body)
     }
 })
 

@@ -4,6 +4,7 @@ const student={
     Email:"Ravi@Test.com"
 }
 
+console.log("This is " + student)
 const strStudent = JSON.stringify(student) 
 console.log(strStudent)
 console.log(strStudent.Email) //this will be undefined as it is a string and not a json object
