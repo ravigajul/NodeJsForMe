@@ -133,6 +133,6 @@ const evenNumbers = numbers.filter(function(n){
 ## Formatted print on console
 ```javascript
 import chalk from 'chalk'
-console.log(chalk.green.inverse("New Notes Added!"))
-console.log(chalk.red.inverse("New Notes removed!"))
+console.log(chalk.green.inverse("This will print in green back ground"))
+console.log(chalk.red.inverse("This will print in red back ground"))
 ```
