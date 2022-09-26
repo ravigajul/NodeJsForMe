@@ -3,7 +3,8 @@ import chalk from 'chalk'
 const getNotes = function () {
     return 'Your notes'
 }
-const addNotes = function (title, body) {
+debugger
+const addNotes = (title, body) => {
     const notes = loadNotes()
     const duplicateNotes = notes.filter(function (note) {
         return note.title === title

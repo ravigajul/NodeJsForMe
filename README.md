@@ -136,3 +136,34 @@ import chalk from 'chalk'
 console.log(chalk.green.inverse("This will print in green back ground"))
 console.log(chalk.red.inverse("This will print in red back ground"))
 ```
+
+## Different ways for writing the same arrow function using arrow functions
+```javascript
+getTasksToDo() 
+{
+    const tasksToDo = this.tasks.filter((task)=>{
+    return task.completed === false
+     })
+    return tasksToDo
+} 
+//Equivalent arrow function for the above 
+getTasksToDo() {
+    return  this.tasks.filter((task)=>{
+    return task.completed === false
+    })
+//Short Hand Arrow function of the same
+getTasksToDo(){
+  return this.tasks.filter((task)=> task.completed === false
+}        
+```
+
+## Debugging
+Write the keyword debugger where ever you want the code to hault
+Run the programe using 
+```javascript
+node inspect app.js add --title="testing" --body="testing"
+or
+node --inspect-brk app.js add --title="testing" --body="testing"
+```
+This will start the program in debug mode. Open chrome and launch chrome://inspect page
+Wait for few seconds and click on the inspect link. This will open the developer console in debugger mode for further debugging.
