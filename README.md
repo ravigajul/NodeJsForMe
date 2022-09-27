@@ -178,3 +178,15 @@ This will convert for instance ? into %3F if ? is present in the address variabl
 ```javascript
 'https://www.example.com/'+ encodedURIComponent(address) + '/somethingelse'
 ```
+
+## Callbacks
+```javascript
+const add = (x,y,callback)=>{    
+    setTimeout(()=>{
+        callback(x+y)
+    },3000)
+}
+add(1,5,(sum)=>{
+    console.log("The sum is " + sum)
+})
+```
