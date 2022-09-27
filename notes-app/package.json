@@ -2,7 +2,7 @@
   "type": "module",
   "name": "nodejsforme",
   "version": "1.0.0",
-  "description": "",
+  "description": "<https://nodejs.org/en/>",
   "main": "first.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -167,3 +167,14 @@ node --inspect-brk app.js add --title="testing" --body="testing"
 ```
 This will start the program in debug mode. Open chrome and launch chrome://inspect page
 Wait for few seconds and click on the inspect link. This will open the developer console in debugger mode for further debugging.
+
+## Generate package.json with default values
+```javascript
+npm init -y
+```
+
+## passing values with special characters in url
+This will convert for instance ? into %3F if ? is present in the address variable that we passed
+```javascript
+'https://www.example.com/'+ encodedURIComponent(address) + '/somethingelse'
+```

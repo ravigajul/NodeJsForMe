@@ -10,7 +10,7 @@ console.log(validator.isEmail('ravi.gajul@test.com'));
 console.log(validator.isURL('https://www.google.com'));
 console.log(chalk.green("Hi There!"));
 console.log(chalk.bgGreen("Hi there!"));
-
+debugger
 //console.log(process.argv)
 
 yargs.version('1.1.0')
