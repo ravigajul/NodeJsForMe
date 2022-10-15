@@ -192,7 +192,7 @@ add(1,5,(sum)=>{
 ```
 
 ## Express js for rendering pages or API responses
-```javscript
+```java
 Express.js for running a webserver
 npm install express --save
 const express = require('express')
@@ -202,17 +202,14 @@ app.listen(3000,()=>{
     console.log('The server is up and running in 3 seconds')
     console.log('open a browser and invoke localhost:3000/help')
 })
-
 /invoking just the domain
 app.get('',(req,res)=>{
     res.send("Hi There!!")
 })
-
 //invoking a resource
 app.get('/help',(req,res)=>{
     res.send('Please reach me at 905-204-6524')
 })
-
 ```
 
 ## Folder Navigation or Path Manipulation
@@ -226,7 +223,30 @@ console.log(path.join(__dirname,'../public')) //C:\Users\anjal\Downloads\NodeJsF
 ```
 
 ## Serving Static html page as the main page from public folder
+The static html files are expected to be present in public folder at root level
 ```javascript
 //serving static html as the main page localhost:3000 or localhost:3000/index.html
 app.use(express.static(path.join(__dirname,'../public')))
+```
+
+## Render dynamic content
+Handle bars is used to render dynamic content in collaboration with express.hbs is the package that works well with express js.
+1. Install hbs app.set to view engine-hbs.
+2. Create a index.hbs file at root level inside views folder
+3. Use res.render to see the dyanamic content. Within the .hbs file bind the variable using hbs syntax {{}}
+```javascript
+npm install hbs
+app.set('view engine','hbs')
+app.get('',(req,res)=>{
+    res.render('index',{
+        title: "This is from hbs file",
+        para: "This is a paragraph"
+    })
+})
+```
+
+## Customize Views Directory to have different name like templates
+```javascript
+const viewsPath = path.join(__dirname,"../templates")
+app.set('views',viewsPath)
 ```
