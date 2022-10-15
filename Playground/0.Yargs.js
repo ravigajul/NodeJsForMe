@@ -1,6 +1,8 @@
 import yargs from "yargs"
 import * as notes from "../notes-app/notes.js"
 
+
+
 yargs.version('1.1.0')
 yargs.command({
     command: "add",
@@ -21,4 +23,6 @@ yargs.command({
         notes.addNotes(argv.title,argv.body)
     }
 })
+
+//console.log(yargs.argv)
 yargs.parse()

@@ -1,9 +1,8 @@
 {
-  "name": "weather-app",
+  "name": "web-server",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
-  "type":"module",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,6 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "request": "^2.88.2"
+    "express": "^4.16.4"
   }
 }

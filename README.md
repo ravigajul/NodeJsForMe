@@ -190,3 +190,43 @@ add(1,5,(sum)=>{
     console.log("The sum is " + sum)
 })
 ```
+
+## Express js for rendering pages or API responses
+```javscript
+Express.js for running a webserver
+npm install express --save
+const express = require('express')
+const app = express()
+//opening  port on the server to listen
+app.listen(3000,()=>{
+    console.log('The server is up and running in 3 seconds')
+    console.log('open a browser and invoke localhost:3000/help')
+})
+
+/invoking just the domain
+app.get('',(req,res)=>{
+    res.send("Hi There!!")
+})
+
+//invoking a resource
+app.get('/help',(req,res)=>{
+    res.send('Please reach me at 905-204-6524')
+})
+
+```
+
+## Folder Navigation or Path Manipulation
+```javascript
+const path = require('path')
+console.log(__dirname) //C:\Users\rgajul\Downloads\NodeJsForMe\web-server\src
+console.log(__filename) //C:\Users\rgajul\Downloads\NodeJsForMe\web-server\src\app.js
+console.log(path.join(__dirname,'../')) //C:\Users\anjal\Downloads\NodeJsForMe\web-server\
+console.log(path.join(__dirname,'../..')) //C:\Users\anjal\Downloads\NodeJsForMe
+console.log(path.join(__dirname,'../public')) //C:\Users\anjal\Downloads\NodeJsForMe\web-server\public
+```
+
+## Serving Static html page as the main page from public folder
+```javascript
+//serving static html as the main page localhost:3000 or localhost:3000/index.html
+app.use(express.static(path.join(__dirname,'../public')))
+```
