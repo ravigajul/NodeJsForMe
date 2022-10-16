@@ -1,46 +1,69 @@
-const path = require('path')
-const express = require('express')
-const hbs = require('hbs')
+import * as utils from './utils/utils.js'
+import path from 'path'
+//const path = require('path')
+import express from 'express'
+import hbs from 'hbs'
 const app = express()
 
+//to fix the __dirname issue with ES6 module
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 //serving static html as the main page localhost:3000
-app.use(express.static(path.join(__dirname,'../public')))
-const viewsPath = path.join(__dirname,"../templates/views")
-const partialsPath = path.join(__dirname,"../templates/partials")
+app.use(express.static(path.join(__dirname, '../public')))
+const viewsPath = path.join(__dirname, "../templates/views")
+const partialsPath = path.join(__dirname, "../templates/partials")
 
 //setting up handle bars and views location to render dynamic pages
-app.set('view engine','hbs')
-app.set('views',viewsPath)
+app.set('view engine', 'hbs')
+app.set('views', viewsPath)
 hbs.registerPartials(partialsPath)
 
-app.get('',(req,res)=>{
-    res.render('index',{
+app.get('', (req, res) => {
+    res.render('index', {
         title: "Weather",
         name: "Created by Ravi Gajul"
     })
 })
 
-app.get('/about',(req,res)=>{
-    res.render('about',{
+app.get('/about', (req, res) => {
+    res.render('about', {
         title: "About Me",
         name: "Created by Ravi Gajul"
     })
 })
 
-app.get('/help',(req,res)=>{
-    res.render('help',{
+app.get('/help', (req, res) => {
+    res.render('help', {
         title: "Help",
         name: "Created by Ravi Gajul"
     })
 })
 
 app.get('/weather', (req, res) => {
-    res.send({ "location": "Hyderabad", "temperature": "26 degrees" })
+    if(!req.query.search){
+        return res.send('Please provide a search term')
+    }
+    console.log(req.query)
+
+    utils.geoCode(req.query.search,(coordinates)=>{
+        utils.getWeather(coordinates,resp=>{
+            res.send(
+                {
+                    "location": req.query.search,
+                    "temperature": resp.body.current.temperature,
+                    "precipitation": resp.body.current.precip
+                }
+            )
+        })
+    })
 })
 
-app.get('/*',(req,res)=>{
-    res.render('404',{
-        code : '404',
+app.get('/*', (req, res) => {
+    res.render('404', {
+        code: '404',
         message: 'Page not found',
         name: "Created by Ravi Gajul"
     })
