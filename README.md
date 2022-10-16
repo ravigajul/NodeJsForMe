@@ -250,3 +250,35 @@ app.get('',(req,res)=>{
 const viewsPath = path.join(__dirname,"../templates")
 app.set('views',viewsPath)
 ```
+
+## Partials for templating web pages
+1. Load hbs
+2. Create two directories templates/partials, templates/partials
+3. Change views Path for the .hbs files to render correctly
+4. Create partials path using path.join
+5. register partials to partials path using hbs
+6. create a new file in partials for header call it header.hbs
+7. header.hbs is not a complete html document but part of a web page
+8. Render a partial in main index.hbs file {{>header}}
+9. nodemon doesn't restart for changes in .hbs. Hence run nodemon with a flag
+    nodemon .\src\apps.js -e js, hbs
+```javascript
+const hbs = require('hbs')
+const partialsPath = Path.join(__dirname,"../public/partials")
+hbs.registerPartials(partialsPath)
+{{>header}} in main .hbs files where header needs to be loaded
+{{>footer}} in main .hbs files where footer needs to be laoded
+```
+
+## Configure 404 Page not found
+
+This should be last followed by other end points as the server checks for relevant webpages or end points in sequence of their occurence
+```javascript
+app.get('/*',(req,res)=>{
+    res.render('404',{
+        code : '404',
+        message: 'Page not found',
+        name: "Created by Ravi Gajul"
+    })
+})
+```
