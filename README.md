@@ -282,3 +282,31 @@ app.get('/*',(req,res)=>{
     })
 })
 ```
+
+## Using the query params
+```javascript
+app.get('/weather', (req, res) => {
+    if(!req.query.search){
+        return res.send('Please provide a search term')
+    }
+    console.log(req.query)
+    res.send(
+        {
+            "location": req.query.search,
+            "temperature": "26 degrees"
+        }
+    )
+})
+```
+
+## Fix for issue with __dirname & __filename with ES6
+
+```javascript
+//to fix the __dirname issue with ES6 module
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+```
+
+## ES-6 Objects and destructuring
