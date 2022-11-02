@@ -335,12 +335,15 @@ console.log(user.email)
 ```
 
 ### 3. Alternate approach to retrieve just age and email from user object
+```javascript
 const {age, email} = user
 console.log(age, email)
-
+```
 ### 4. Rename a property while extracting
+```javascript
 const {name: newName, age:newAge, email:newEmail} = user
 console.log(newName,newAge,newEmail)
+```
 
 ### 5. Destructing with function arguments
 ```javascript
