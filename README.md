@@ -253,7 +253,7 @@ app.set('views',viewsPath)
 
 ## Partials for templating web pages
 1. Load hbs
-2. Create two directories templates/partials, templates/partials
+2. Create two directories templates/partials, templates/views
 3. Change views Path for the .hbs files to render correctly
 4. Create partials path using path.join
 5. register partials to partials path using hbs
@@ -264,7 +264,7 @@ app.set('views',viewsPath)
     nodemon .\src\apps.js -e js, hbs
 ```javascript
 const hbs = require('hbs')
-const partialsPath = Path.join(__dirname,"../public/partials")
+const partialsPath = Path.join(__dirname,"../templates/partials")
 hbs.registerPartials(partialsPath)
 {{>header}} in main .hbs files where header needs to be loaded
 {{>footer}} in main .hbs files where footer needs to be laoded
@@ -283,7 +283,7 @@ app.get('/*',(req,res)=>{
 })
 ```
 
-## Using the query params
+## Using the query params from url
 ```javascript
 app.get('/weather', (req, res) => {
     if(!req.query.search){
@@ -350,5 +350,36 @@ console.log(newName,newAge,newEmail)
 const addName=(what,{name,age,email})=>{
     console.log(what, email, age, name)
 }
-addName('Add',user)
+addName('AddName',user)
 ```
+
+### 6. Default function parameter values
+```javascript
+//6. Default naming in function parameters Nodejs is print when that argument value is passed.TestCourse which default is printed when no argument is passed.
+const print=(course="TestCourse")=>{
+    console.log("Hi There " + course)
+}
+print("Nodejs")
+print()
+```
+
+### 7. Destructing an empty object passed while calling the function
+```javascript
+//Here undefined object is referenced when no object is passed while calling and doesn't lead to exception
+//trouser object is destructured when trouser object is passed. 
+//when no object is passed city is defaulted to texas and make to undefined as we are destructing empty object.
+const trouser = {
+    make: "AmericanEagle",
+    location:"Buckhead",
+    city:"Atlanta",
+    State:"Georgia"
+}
+
+const dress = (transaction,{make,city="Texas"}={})=>{
+    console.log(transaction + " "+make+" " + "at " + city)
+}
+dress("purchase")
+dress("purchase",trouser)
+```
+
+## WebServers

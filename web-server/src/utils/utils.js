@@ -1,16 +1,20 @@
 import request from 'request'
 const geoCode = (place, callback) => {
     const geoCodeUrl = "https://api.mapbox.com/geocoding/v5/mapbox.places/" +encodeURIComponent(place) +".json?access_token=pk.eyJ1IjoicmF2aWdhanVsIiwiYSI6ImNsMmo0YXBiczB1MTQzZm9qYmxobTFrM2cifQ.u2dvtrT8mDrIazg9Fup17Q&limit=1"
-    request(geoCodeUrl, function (error, response, body) {
+    debugger
+    
+    request(geoCodeUrl, function (error, response) {
         //explicit json parsing
-        const resp = JSON.parse(body)
         debugger
+        const resp = JSON.parse(response.body)
+        
         if (error) {
             console.log("500 Internal Server error - Geocoding")
         } else if (response.body.error) {
             console.log("400-bad request - geocoding")
         } else if (resp.features.length === 0) {
             console.log("Place Doesnot exit")
+            callback({errorMessage:"Place doesnot exit"})
         } else {
 
             const place_name = resp.features[0].place_name

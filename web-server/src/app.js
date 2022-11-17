@@ -47,8 +47,12 @@ app.get('/weather', (req, res) => {
         return res.send('Please provide a search term')
     }
     console.log(req.query)
-
+    debugger
     utils.geoCode(req.query.search,(coordinates)=>{
+        if(coordinates.errorMessage){
+            debugger
+            res.send(coordinates.errorMessage)
+        }else{
         utils.getWeather(coordinates,resp=>{
             res.send(
                 {
@@ -57,7 +61,7 @@ app.get('/weather', (req, res) => {
                     "precipitation": resp.body.current.precip
                 }
             )
-        })
+        })}
     })
 })
 
