@@ -14,21 +14,21 @@ const geoCode = (place, callback) => {
             console.log("400-bad request - geocoding")
         } else if (resp.features.length === 0) {
             console.log("Place Doesnot exit")
-            callback({errorMessage:"Place doesnot exit"})
+            callback("",{errorMessage:"Place doesnot exit"})
         } else {
 
             const place_name = resp.features[0].place_name
             const center = resp.features[0].center
             debugger
 
-            callback(center)
+            callback(place_name,center)
         }
     });
 
 }
-const getWeather = (coordinates, callback) => {
-    const latitude = coordinates[1]
-    const longitude = coordinates[0]
+const getWeather = (center, callback) => {
+    const latitude = center[1]
+    const longitude = center[0]
     const url = 'http://api.weatherstack.com/current?access_key=e84a396be35e4b7babdec9031b34365e&query=' + latitude + ',' + longitude
     //implicit json parsing
     debugger
@@ -38,6 +38,7 @@ const getWeather = (coordinates, callback) => {
         } else if (response.body.error) {
             console.log('400 - Bad Request')
         } else {
+            debugger
             callback(response)
             }
     });

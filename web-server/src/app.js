@@ -48,16 +48,17 @@ app.get('/weather', (req, res) => {
     }
     console.log(req.query)
     debugger
-    utils.geoCode(req.query.search,(coordinates)=>{
-        if(coordinates.errorMessage){
+    utils.geoCode(req.query.search,(place_name,center)=>{
+        if(center.errorMessage){
             debugger
-            res.send(coordinates.errorMessage)
+            res.send(center.errorMessage)
         }else{
-        utils.getWeather(coordinates,resp=>{
+        utils.getWeather(center,resp=>{
             res.send(
                 {
-                    "location": req.query.search,
+                    "location": place_name,
                     "temperature": resp.body.current.temperature,
+                    "feelslike": resp.body.current.feelslike,
                     "precipitation": resp.body.current.precip
                 }
             )
