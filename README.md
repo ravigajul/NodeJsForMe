@@ -180,13 +180,16 @@ This will convert for instance ? into %3F if ? is present in the address variabl
 ```
 
 ## Callbacks
+A callback function is a function as argument to some function that can be called at some point in the main function in order to avoid undefined values thrown by java script due to async nature of javascript execution.
 ```javascript
+//here add function as three parameter x, y and callback is a function parameter which is called within setTimeout with (x+y) as parameter
 const add = (x,y,callback)=>{    
     setTimeout(()=>{
         callback(x+y)
     },3000)
 }
-add(1,5,(sum)=>{
+
+add(1,5,(error,sum)=>{
     console.log("The sum is " + sum)
 })
 ```

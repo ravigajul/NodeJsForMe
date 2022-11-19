@@ -43,26 +43,31 @@ app.get('/help', (req, res) => {
 })
 
 app.get('/weather', (req, res) => {
-    if(!req.query.search){
+    if (!req.query.search) {
         return res.send('Please provide a search term')
     }
     console.log(req.query)
     debugger
-    utils.geoCode(req.query.search,(place_name,center)=>{
-        if(center.errorMessage){
+    utils.geoCode(req.query.search, (error, center) => {
+        if (error) {
             debugger
-            res.send(center.errorMessage)
-        }else{
-        utils.getWeather(center,resp=>{
-            res.send(
-                {
-                    "location": place_name,
-                    "temperature": resp.body.current.temperature,
-                    "feelslike": resp.body.current.feelslike,
-                    "precipitation": resp.body.current.precip
+            res.send(error)
+        } else {
+            utils.getWeather(center, (error, resp) => {
+                if (error) {
+                    res.send(err)
+                } else {
+                    res.send(
+                        {
+                            "location": center.place_name,
+                            "forcast": "The temperature is " + resp.body.current.temperature + "  degrees and it feels like " + resp.body.current.feelslike + " degrees. And there is a  " + resp.body.current.precip + " % probability of rain",
+                            "address": req.query.search
+                        }
+                    )
                 }
-            )
-        })}
+
+            })
+        }
     })
 })
 
