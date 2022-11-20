@@ -10,7 +10,7 @@ weatherForm.addEventListener('submit',(e)=>{
     //This will prevent the browser to reload on clicking submit that si default behaviour
     e.preventDefault()
     const location = txtLocation.value
-    fetch('http://localhost:3000/Weather?search=' + location).then((response)=>{
+    fetch('/Weather?search=' + location).then((response)=>{
     response.json().then((data)=>{
         debugger
         if(data.error){

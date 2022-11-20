@@ -385,4 +385,32 @@ dress("purchase")
 dress("purchase",trouser)
 ```
 
-## WebServers
+## Fetch API    
+Fetch API to be used on client side java scripting to render or read different html elements
+
+## Deployment
+```java script
+Install Heroku cli
+heroku -v
+heroku login
+Enter any key except key to login to heroku 
+Set up git hub account and add ssh key to github
+add the project to git hub
+heroku  keys:add
+heroku create gajuls-weather-app
+Live url and repo url on heroku
+https://gajuls-weather-app.herokuapp.com/ | https://git.heroku.com/gajuls-weather-app.git
+Update package.json to have the script to run
+ "scripts": {
+    "start":"node ./web-server/src/app.js"
+  }
+//Make below changes in app.js
+//to get the port number from heroku. Or condition to default to 3000 if it exists
+const port = process.env.PORT || 3000
+//opening  port on the server to listen
+app.listen(PORT, () => {
+    console.log('The server is up and running in 3 seconds')
+    console.log('open a browser and invoke localhost:' + PORT + '/help')
+})
+update the app.js in js folder to refer to heroku url
+```

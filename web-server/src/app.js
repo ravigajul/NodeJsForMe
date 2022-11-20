@@ -4,7 +4,8 @@ import path from 'path'
 import express from 'express'
 import hbs from 'hbs'
 const app = express()
-
+//to get the port number from heroku. Or condition to default to 3000 if it exists
+const port = process.env.PORT || 3000
 //to fix the __dirname issue with ES6 module
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -80,7 +81,7 @@ app.get('/*', (req, res) => {
 })
 
 //opening  port on the server to listen
-app.listen(3000, () => {
+app.listen(PORT, () => {
     console.log('The server is up and running in 3 seconds')
-    console.log('open a browser and invoke localhost:3000/help')
+    console.log('open a browser and invoke localhost:' + PORT + '/help')
 })
