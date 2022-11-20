@@ -44,18 +44,18 @@ app.get('/help', (req, res) => {
 
 app.get('/weather', (req, res) => {
     if (!req.query.search) {
-        return res.send('Please provide a search term')
+        return res.send({error:"Please provide a search term"})
     }
     console.log(req.query)
     debugger
     utils.geoCode(req.query.search, (error, center) => {
         if (error) {
             debugger
-            res.send(error)
+            res.send({error})
         } else {
             utils.getWeather(center, (error, resp) => {
                 if (error) {
-                    res.send(err)
+                    res.send({error})
                 } else {
                     res.send(
                         {
