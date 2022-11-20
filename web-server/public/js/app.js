@@ -1,7 +1,4 @@
 console.log("This is from java script")
-
-
-
 const weatherForm = document.querySelector('form')
 const txtLocation = document.querySelector('input')
 const messageOne= document.querySelector('#message-1')
@@ -10,6 +7,7 @@ weatherForm.addEventListener('submit',(e)=>{
     //This will prevent the browser to reload on clicking submit that si default behaviour
     e.preventDefault()
     const location = txtLocation.value
+    
     fetch('/Weather?search=' + location).then((response)=>{
     response.json().then((data)=>{
         debugger

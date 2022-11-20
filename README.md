@@ -397,9 +397,9 @@ Enter any key except key to login to heroku
 Set up git hub account and add ssh key to github
 add the project to git hub
 heroku  keys:add
-heroku create gajuls-weather-app
+heroku create gajul-weather-app
 Live url and repo url on heroku
-https://gajuls-weather-app.herokuapp.com/ | https://git.heroku.com/gajuls-weather-app.git
+https://gajul-weather-app.herokuapp.com/ | https://git.heroku.com/gajul-weather-app.git
 Update package.json to have the script to run
  "scripts": {
     "start":"node ./web-server/src/app.js"
@@ -413,4 +413,6 @@ app.listen(PORT, () => {
     console.log('open a browser and invoke localhost:' + PORT + '/help')
 })
 update the app.js in js folder to refer to heroku url
+git push origin master //for git hub
+git push heroku master //for heroku
 ```
