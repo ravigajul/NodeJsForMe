@@ -416,3 +416,6 @@ update the app.js in js folder to refer to heroku url
 git push origin master //for git hub
 git push heroku master //for heroku
 ```
+
+## Dev Dependency.
+Modules installed as dev dependencies like nodemon may fail when trying to execute the nodemon command as is. However, it works if globally installed. Also, it works if we run it as npm run <scriptname>. Scriptname is the name given in scripts attribute of package.json file.
