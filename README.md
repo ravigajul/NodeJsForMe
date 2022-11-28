@@ -419,3 +419,87 @@ git push heroku master //for heroku
 
 ## Dev Dependency.
 Modules installed as dev dependencies like nodemon may fail when trying to execute the nodemon command as is. However, it works if globally installed. Also, it works if we run it as npm run <scriptname>. Scriptname is the name given in scripts attribute of package.json file.
+
+# MongoDB
+## Normal DB vs MongoDB
+Table       -   Collection
+Record/Row  -   Document
+Column      -   Field
+
+## Starting MongoDB
+Data can be viewed/queried using Studio 3T
+```javascript
+/Users/<userfolder>/mongodb/bin/mongod.exe --dbpath=/Users/<userfolder>/mongodb-data
+```
+
+## Mongoose
+It is a nodejs module used for adding constraints to the data, for data modelling and many others.
+
+## Mongoose Model
+```javascript
+const Tasks = mongoose.model('Tasks',{
+    description:{
+        type: String
+    },
+    completed:{
+        type: Boolean
+    }
+})
+
+const todo = new Tasks({
+    description: 'Complete Nodejs',
+    completed: false
+})
+```
+## Data Validation & Data Sanitization
+Data Validation is for intance putting a condition like age > 20
+Data Sanitization is for instance trimming empty spaces around the name
+Reference : https://mongoosejs.com/docs/validation.html
+```javascript
+const User = mongoose.model('User',{
+    name: {
+        type: String,
+        required: true
+    },
+    email:{
+        type: String,
+        required: true,
+        validate(value){
+            //node module validator
+           if(!validator.isEmail(value)){
+                throw new Error(value + " is not a valid email address")
+           }    
+        }
+        
+    },
+    age: {
+        type: Number,
+        required: true,
+        validate(value){
+            //user defined validator
+            if(value<0){
+                throw new Error("Age cannot be less than zero")
+            }
+        }
+    }
+})
+
+//instantiating the class defined above
+const me = new User({
+    name: 'Rajesh',
+    email: "test@test.com",
+    age: 37
+   
+})
+//.save returns a promise
+me.save().then(()=>{
+    console.log(me)
+}).catch((error)=>{
+    console.log('Error:', error)
+})
+```
+# References
+https://github.com/andrewjmead
+https://expressjs.com/
+https://www.npmjs.com/package/mongoose
+https://mongoosejs.com/docs/index.html
