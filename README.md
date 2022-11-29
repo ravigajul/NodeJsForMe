@@ -498,6 +498,25 @@ me.save().then(()=>{
     console.log('Error:', error)
 })
 ```
+## Automatic capturing of request json
+```javascript
+//to automatically parse the request body and make it available in req.
+app.use(express.json())
+
+app.post('/users',(req,res)=>{
+
+    //req.body is the request body parsed automatically by line 9
+    const user = new User(req.body)
+    user.save().then((data)=>{
+        res.status(201)
+        res.send(data)
+    }).catch((e)=>{
+        res.status(400)
+        res.send(e)
+    })
+})
+```
+
 # References
 https://github.com/andrewjmead
 https://expressjs.com/
