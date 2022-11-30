@@ -432,6 +432,75 @@ Data can be viewed/queried using Studio 3T
 /Users/<userfolder>/mongodb/bin/mongod.exe --dbpath=/Users/<userfolder>/mongodb-data
 ```
 
+## Connect to DB
+```javascript
+MongoClient.connect(connectionUrl, { useNewUrlParser: true }, (error, client) => {
+    if (error) {
+        return console.log("unable to connect to DB")
+    }
+    console.log("Connected Successfully!")
+    const db = client.db(databaseName)
+```
+## Insert a document
+```javascript
+db.collection('user').insertOne(
+        {
+            name: "Ravi",
+            age: 37
+        })
+```
+## Object Id 
+Id in mongodb is stored as function Object(). The reason for this is because the size is reduced by half when compared to storing as a string.
+```javascript
+const id = new mongodb.ObjectId
+//12 byte binary buffer
+console.log(id.id)
+//24 character string representaton 
+console.log(id.toHexString())
+```
+## Query for one Document
+```javascript
+ //Querying the document using id
+    db.collection('users').findOne({ _id: new ObjectId("6386bc8786ea64fef3d6e0fd") }, (error, user) => {
+        if (error) {
+            return console.log('unable to fetch data')
+        }
+        console.log(user)
+    })
+
+    //Querying the document using name and age
+    db.collection('users').findOne({ name: 'Ravi', age: 37 }, (error, user) => {
+        if (error) {
+            return console.log('unable to fetch data')
+        }
+        console.log(user)
+    })
+
+
+    //Querying the document using name
+    db.collection('users').findOne({ name: 'Ravi' }, (error, user) => {
+        if (error) {
+            return console.log('unable to fetch data')
+        }
+        console.log(user)
+    })
+
+    //Querying multiple documents using name. Returns a cursor unlike find one
+    https://www.mongodb.com/docs/drivers/node/current/usage-examples/find/
+
+     //Querying multiple documents. This returns a cursor unlike find one
+    db.collection('users').find({ age: 37 }).toArray((error,users)=>{
+        console.log(users)
+    })
+
+    //count of rows. Cursor has many methods that we can explore in documentation
+    db.collection('users').find({ age: 37 }).count((error,count)=>{
+        console.log(count)
+    })
+```
+## Promises
+
+
 ## Mongoose
 It is a nodejs module used for adding constraints to the data, for data modelling and many others.
 
@@ -517,7 +586,11 @@ app.post('/users',(req,res)=>{
 })
 ```
 
-# References
+## Mongoose Queries
+https://mongoosejs.com/docs/queries.html
+
+
+## References
 https://github.com/andrewjmead
 https://expressjs.com/
 https://www.npmjs.com/package/mongoose
