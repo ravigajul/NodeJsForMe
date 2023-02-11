@@ -28,10 +28,12 @@ Some modules like console are available globally
 others needs to be explicitly loaded
 
 ## require user defined modules
-
+```javascript
 const name = require('./utils.js')
-here require will import the variables or object exported in utils.js by modules.export=<variable/object> and assign it to variable name. This name can access the properties and methods of utils.js utility. Note the ./ indicating this is a user defined module and not a standard module from any of the libraries.
-
+//here require will import the variables or object exported in utils.js by modules.export=<variable/object> and assign it to variable name.
+//This name can access the properties and methods of utils.js utility. 
+//Note the ./ indicating this is a user defined module and not a standard module from any of the libraries.
+```
 ## validator package
 
 for several string util functions like isEmail, isURL etc.
@@ -216,6 +218,7 @@ app.get('/help',(req,res)=>{
 ```
 
 ## Folder Navigation or Path Manipulation
+In this case, the line of code is constructing a file path by starting with the directory name of the current module (__dirname), and then appending '../public' to it. The '../public' part of the path is a relative path, which means it specifies a path relative to the current directory. The .. part of the relative path indicates that we want to move up one directory from the current directory, and the /public part of the relative path specifies that we want to access the public directory within that parent directory
 ```javascript
 const path = require('path')
 console.log(__dirname) //C:\Users\rgajul\Downloads\NodeJsForMe\web-server\src
@@ -223,6 +226,15 @@ console.log(__filename) //C:\Users\rgajul\Downloads\NodeJsForMe\web-server\src\a
 console.log(path.join(__dirname,'../')) //C:\Users\anjal\Downloads\NodeJsForMe\web-server\
 console.log(path.join(__dirname,'../..')) //C:\Users\anjal\Downloads\NodeJsForMe
 console.log(path.join(__dirname,'../public')) //C:\Users\anjal\Downloads\NodeJsForMe\web-server\public
+```
+## Fix for issue with __dirname & __filename with ES6
+
+```javascript
+//to fix the __dirname issue with ES6 module
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 ```
 
 ## Serving Static html page as the main page from public folder
@@ -302,16 +314,6 @@ app.get('/weather', (req, res) => {
 })
 ```
 
-## Fix for issue with __dirname & __filename with ES6
-
-```javascript
-//to fix the __dirname issue with ES6 module
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-```
-
 ## ES-6 Objects and destructuring
 ### 1. When property and its value are same, we can just use property (shorthand syntax)
 ```javascript
@@ -381,8 +383,8 @@ const trouser = {
 const dress = (transaction,{make,city="Texas"}={})=>{
     console.log(transaction + " "+make+" " + "at " + city)
 }
-dress("purchase")
-dress("purchase",trouser)
+dress("purchase") //purchase undefined at Texas
+dress("purchase",trouser) //purchase AmericanEagle at Atlanta
 ```
 
 ## Fetch API    
@@ -621,7 +623,7 @@ add(1,2).then((sum)=>{
 })
 ```
 ## References
-https://github.com/andrewjmead
-https://expressjs.com/
-https://www.npmjs.com/package/mongoose
-https://mongoosejs.com/docs/index.html
+https://github.com/andrewjmead<br>
+https://expressjs.com/<br>
+https://www.npmjs.com/package/mongoose<br>
+https://mongoosejs.com/docs/index.html<br>
