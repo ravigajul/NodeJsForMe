@@ -21,7 +21,10 @@ npm --version
 ```node
 npm init
 ```
-
+## Clean npm cache
+```node
+npm cache clean --force
+```
 ## importing nodemodules
 
 Some modules like console are available globally
