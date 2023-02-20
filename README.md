@@ -271,6 +271,7 @@ app.get('',(req,res)=>{
 ## Customize Views Directory to have different name like templates
 ```javascript
 const viewsPath = path.join(__dirname,"../templates")
+//This is required when the default view folder is not views but something else like templates
 app.set('views',viewsPath)
 ```
 
