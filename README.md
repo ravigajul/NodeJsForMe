@@ -276,6 +276,7 @@ app.set('views',viewsPath)
 ```
 
 ## Partials for templating web pages
+Partials is used to render a partial content of an html page like headers and footers.
 1. Load hbs
 2. Create two directories templates/partials, templates/views
 3. Change views Path for the .hbs files to render correctly
@@ -289,7 +290,9 @@ app.set('views',viewsPath)
 ```javascript
 const hbs = require('hbs')
 const partialsPath = Path.join(__dirname,"../templates/partials")
+//registering a partial
 hbs.registerPartials(partialsPath)
+//this the test to be used in actual index.hbs file where the header is to be rendered.Note the extra ">" for rendering partials
 {{>header}} in main .hbs files where header needs to be loaded
 {{>footer}} in main .hbs files where footer needs to be laoded
 ```
