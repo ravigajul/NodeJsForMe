@@ -248,6 +248,10 @@ app.use(express.static(path.join(__dirname,'../public')))
 ```
 Now on navigating to localhost:3000/help.html will display the help html in the public folder and about.html will show the content in above.html. No Routes need to be added like app.get('/help') or app.get('/about')
 
+## referencing a style sheet in head tag of html page
+```html
+<link rel="stylesheet" href="./css/styles.css">
+```
 ## Render dynamic content
 Handle bars is used to render dynamic content in collaboration with express.hbs is the package that works well with express js.
 1. Install hbs app.set to view engine-hbs.
