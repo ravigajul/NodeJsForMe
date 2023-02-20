@@ -246,6 +246,7 @@ The static html files are expected to be present in public folder at root level
 //serving static html as the main page localhost:3000 or localhost:3000/index.html
 app.use(express.static(path.join(__dirname,'../public')))
 ```
+Now on navigating to localhost:3000/help.html will display the help html in the public folder and about.html will show the content in above.html. No Routes need to be added like app.get('/help') or app.get('/about')
 
 ## Render dynamic content
 Handle bars is used to render dynamic content in collaboration with express.hbs is the package that works well with express js.
