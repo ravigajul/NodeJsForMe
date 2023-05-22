@@ -433,7 +433,7 @@ git push heroku master //for heroku
 
 ## Dev Dependency.
 Modules installed as dev dependencies like nodemon may fail when trying to execute the nodemon command as is. However, it works if globally installed. Also, it works if we run it as npm run <scriptname>. Scriptname is the name given in scripts attribute of package.json file.
-
+```javascript
 //Promise Chaining. The below then is executed when add function is resolved
 add(1,2).then((sum)=>{
     console.log(sum)
@@ -446,6 +446,41 @@ add(1,2).then((sum)=>{
     console.log(e)
 })
 ```
+## Powershell
+ Powershell script to create a registry key if doesn't exist. Create if subkey is not present. Update if subkey is present with wrong value. Do nothing if all good.
+ ```javascript
+  $KeyPath = "HKLM:\\SOFTWARE\\Policies\\Google\\Chrome\\ExtensionInstallForceList"
+$SubkeyName = "1"
+$ExtensionId = "id"
+$NewValue = "new value"
+
+# Check if the key path exists
+if (!(Test-Path -Path $KeyPath)) {
+    # Key path doesn't exist, create the key path and add subkey with value
+    New-Item -Path $KeyPath | Out-Null
+    Set-ItemProperty -Path $KeyPath -Name $SubkeyName -Value $NewValue
+    Write-Host "The key path $KeyPath has been created, and subkey $SubkeyName with value $NewValue has been added."
+}
+else {
+    # Key path exists, check if subkey exists
+    $existingValue = (Get-ItemProperty -Path $KeyPath -Name $SubkeyName -ErrorAction SilentlyContinue).$SubkeyName
+
+    if ($existingValue -eq $null) {
+        # Subkey doesn't exist, create the subkey with value
+        Set-ItemProperty -Path $KeyPath -Name $SubkeyName -Value $NewValue
+        Write-Host "The subkey $SubkeyName with value $NewValue has been created under $KeyPath."
+    }
+    elseif ($existingValue -ne $NewValue) {
+        # Subkey exists but has a different value, update the value
+        Set-ItemProperty -Path $KeyPath -Name $SubkeyName -Value $NewValue
+        Write-Host "The subkey $SubkeyName value has been updated to $NewValue under $KeyPath."
+    }
+    else {
+        # Subkey exists with the same value, no action required
+        Write-Host "The subkey $SubkeyName already exists with the correct value under $KeyPath. No action required."
+    }
+}
+  ```
 ## References
 https://github.com/andrewjmead<br>
 https://expressjs.com/<br>
