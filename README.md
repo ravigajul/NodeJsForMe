@@ -449,12 +449,9 @@ add(1,2).then((sum)=>{
 ## Powershell
  Powershell script to create a registry key if doesn't exist. Create if subkey is not present. Update if subkey is present with wrong value. Do nothing if all good.
  ```javascript
-  $KeyPath = "HKLM:\\SOFTWARE\\Policies\\Google\\Chrome\\ExtensionInstallForceList"
-$SubkeyName = "1"
-$ExtensionId = "id"
-$NewValue = "new value"
-
-# Check if the key path exists
+ function UpdateRegistryEntry($KeyPath, $ExtensionId, $NewValue) {
+	$SubkeyName = "1"
+    # Check if the key path exists
 if (!(Test-Path -Path $KeyPath)) {
     # Key path doesn't exist, create the key path and add subkey with value
     New-Item -Path $KeyPath | Out-Null
@@ -480,6 +477,36 @@ else {
         Write-Host "The subkey $SubkeyName already exists with the correct value under $KeyPath. No action required."
     }
 }
+}
+
+$ChromeKeyPath = "HKLM:\\SOFTWARE\\Policies\\Google\\Chrome\\ExtensionInstallForceList"
+$EdgeKeyPath = "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Edge\\ExtensionInstallForcelist"
+$ExtensionId = "sdfsadfsfsfsfsffsfsafsf"
+$NewValue = "sdfsfgldeabbkcidchfdifcghijihb"
+
+# Update Chrome registry entry
+UpdateRegistryEntry -KeyPath $ChromeKeyPath -ExtensionId $ExtensionId -NewValue $NewValue
+
+# Update Edge registry entry
+UpdateRegistryEntry -KeyPath $EdgeKeyPath -ExtensionId $ExtensionId -NewValue $NewValue
+
+# Stop Chrome
+$chromeProcess = Get-Process -Name "chrome" -ErrorAction SilentlyContinue
+if ($chromeProcess) {
+    Stop-Process -Name "chrome" -Force
+    Write-Host "Chrome has been closed."
+}
+#Start-Process "chrome"
+
+# Stop Edge
+$edgeProcess = Get-Process -Name "msedge" -ErrorAction SilentlyContinue
+if ($edgeProcess) {
+    Stop-Process -Name "msedge" -Force
+    Write-Host "Microsoft Edge has been closed."
+}
+
+#Start-Process "msedge"
+
   ```
 ## References
 https://github.com/andrewjmead<br>
