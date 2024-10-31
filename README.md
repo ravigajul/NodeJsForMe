@@ -507,6 +507,56 @@ if ($edgeProcess) {
 
 #Start-Process "msedge"
 
+## Split single csv into multiple csvs
+```
+const fs = require('fs');
+const csv = require('csv-parser');
+
+const inputFile = 'input.csv'; // Your input CSV file
+const rowsPerFile = 5000;
+let fileCount = 0;
+let rowCount = 0;
+let rows = [];
+let headers = null;
+
+const writeRowsToFile = (rows, fileCount) => {
+  const outputFile = `output_${fileCount}.csv`;
+  const csvContent = [headers.join(','), ...rows.map(row => headers.map(header => row[header]).join(','))].join('\n');
+  fs.writeFileSync(outputFile, csvContent);
+  console.log(`File ${outputFile} written with ${rows.length} rows.`);
+};
+
+fs.createReadStream(inputFile)
+  .pipe(csv())
+  .on('headers', (headerList) => {
+    headers = headerList;
+  })
+  .on('data', (row) => {
+    if (!headers) {
+      headers = Object.keys(row);
+    }
+    rows.push(row);
+    rowCount++;
+
+    if (rowCount === rowsPerFile) {
+      fileCount++;
+      writeRowsToFile(rows, fileCount);
+      rows = [];
+      rowCount = 0;
+    }
+  })
+  .on('end', () => {
+    if (rows.length > 0) {
+      fileCount++;
+      writeRowsToFile(rows, fileCount);
+    }
+    console.log('CSV file successfully split into smaller files.');
+  })
+  .on('error', (err) => {
+    console.error('Error reading the CSV file:', err);
+  });
+```
+
   ```
 ## References
 https://github.com/andrewjmead<br>
