@@ -559,7 +559,29 @@ fs.createReadStream(inputFile)
     console.error('Error reading the CSV file:', err);
   });
 ```
+## Reading a json file
+```javascript
+const fs = require('fs');
 
+// Path to the JSON file
+const filePath = 'data.json';
+
+// Read the JSON file
+fs.readFile(filePath, 'utf8', (err, data) => {
+  if (err) {
+    console.error('Error reading the file:', err);
+    return;
+  }
+
+  try {
+    // Parse the JSON data
+    const jsonData = JSON.parse(data);
+    getVerificationInfo(true,jsonData)
+  } catch (parseErr) {
+    console.error('Error parsing JSON:', parseErr);
+  }
+})
+```
   ```
 ## References
 https://github.com/andrewjmead<br>
