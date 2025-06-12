@@ -11,6 +11,11 @@ npm cache clean --force
 npm install
 ```
 
+## Check the packages installed on global level
+```
+npm list -g --depth=0
+```
+
 ## Set environment variables
 
 NODE_HOME = C:\Program Files\nodejs\node_modules\npm
