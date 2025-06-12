@@ -4,6 +4,13 @@
 
 <https://nodejs.org/en/>
 
+## Clean slate for Debugging
+```
+rm -rf node_modules package-lock.json
+npm cache clean --force
+npm install
+```
+
 ## Set environment variables
 
 NODE_HOME = C:\Program Files\nodejs\node_modules\npm
